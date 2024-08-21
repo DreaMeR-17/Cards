@@ -102,7 +102,7 @@ namespace Cards
 
             if (userInput == commandSmallDeck)
             {
-                _dealer.FillFullDeck();
+                _dealer.FillSmallDeck();
             }
             else if (userInput == commandFullDeck)
             {
@@ -161,7 +161,7 @@ namespace Cards
         }
 
         public void FillFullDeck()
-        {
+        {    
             _deck = _deckFactory.CreateFullDeck();
         }
     }
@@ -223,24 +223,19 @@ namespace Cards
 
         public Deck CreateSmallDeck()
         {
-            List<Card> cards = new List<Card>();
-
-            foreach (string name in _smallDeckNames)
-            {
-                foreach (char suit in _suits)
-                {
-                    cards.Add(new Card(name, suit));
-                }
-            }
-
-            return new Deck(cards);
+            return CreateDeck(_smallDeckNames);
         }
 
         public Deck CreateFullDeck()
         {
+            return CreateDeck(_fullDeckNames);
+        }
+
+        private Deck CreateDeck(string[] cardNames)
+        {
             List<Card> cards = new List<Card>();
 
-            foreach (string name in _fullDeckNames)
+            foreach (string name in cardNames)
             {
                 foreach (char suit in _suits)
                 {
